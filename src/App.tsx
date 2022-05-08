@@ -1,41 +1,24 @@
-import React, {useState} from 'react';
-import st from './App.module.css';
-import {Button} from "./component/Button";
+import React from 'react';
+import {BrowserRouter, Navigate, Route, Routes} from 'react-router-dom';
+import {Counter} from "./component/Counter";
+import {CounterSettings} from "./component/CounterSettings";
 
+export const PATH = {
+    COUNTER: '/counter',
+    COUNTER_SETTINGS: '/counter_settings',
+}
 
 function App() {
-    let [num, setNum] = useState(0)
-    let [settings, setSettings] = useState(false)
 
-    const onClickHandlerA = () => {
-        setNum(num + 1);
-    }
-    const onClickHandlerB = () => {
-        setNum(0);
-    }
-
-
-    const countLimit = 5;
-
-        return (
-
-            <div className={st.App}>
-
-                <div className={st.tablo}>
-                    <h1 className={num >= 5 ? st.limit : ''}>{num}</h1>
-                </div>
-
-                <div className={st.space}></div>
-
-                <div className={st.buttons}>
-                    <Button disabled={num === countLimit ? true : false} name={'Inc'} callBack={onClickHandlerA}/>
-                    <Button disabled={num === 0 ? true : false} name={'Reset'} callBack={onClickHandlerB}/>
-                </div>
-
-
-            </div>
-
-        );
+    return (
+        <BrowserRouter>
+            <Routes>
+                <Route path={'/'} element={<Navigate to={PATH.COUNTER}/>}/>
+                <Route path={PATH.COUNTER} element={<Counter/>}/>
+                <Route path={PATH.COUNTER_SETTINGS} element={<CounterSettings/>}/>
+            </Routes>
+        </BrowserRouter>
+    );
 
 
 }
