@@ -16,8 +16,6 @@ export const CounterSettings = () => {
 
 
     const onClickSettings = () => {
-        console.log(state.startNumber)
-        console.log(state.limitNumber)
         state.actualNumber = state.startNumber
     }
 
@@ -30,11 +28,6 @@ export const CounterSettings = () => {
     const onKeyPressCallback = (e: KeyboardEvent<HTMLInputElement>, whichNumber: string) => {
         if (e.key === 'Enter') {
             dispatch(setNumberAC(Number(e.currentTarget.value), whichNumber));
-            console.log("StartNumber " + state.startNumber)
-            console.log("LimitNumber " + state.limitNumber)
-            console.log(whichNumber)
-            console.log(state)
-
 
         }
     }
@@ -69,7 +62,7 @@ export const CounterSettings = () => {
 
             <div className={st.buttons}>
                 <NavLink to={PATH.COUNTER}>
-                    <Button disabled={false} name={'Set'} callBack={onClickSettings}/>
+                    <Button disabled={state.startNumber >= state.limitNumber ? true : false} name={'Set'} callBack={onClickSettings}/>
                 </NavLink>
             </div>
 
